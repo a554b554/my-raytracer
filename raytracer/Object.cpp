@@ -95,6 +95,76 @@ intersectResult UnionObject::intersect(const Ray &ray){
     
 }
 
+Triangle::Triangle(Vec3d _v1, Vec3d _v2, Vec3d _v3):v1(_v1),v2(_v2),v3(_v3),Object(Vec3d(0,0,0)){
+    Vec3d v1v2 = v2-v1;
+    Vec3d v1v3 = v3-v1;
+    normal = v1v2.cross(v1v3);
+    normal /= norm(normal);
+    d = (-v1).dot(normal);
+}
+
+bool Triangle::isInTriangle(const Vec3d &v){
+    Vec3d v1v2 = v2-v1;
+    Vec3d v1v = v-v1;
+    Vec3d v1v2xv1v = v1v2.cross(v1v);
+    
+    Vec3d v2v3 = v3-v2;
+    Vec3d v2v = v-v2;
+    Vec3d v2v3xv2v = v2v3.cross(v2v);
+    if (v1v2xv1v.dot(v2v3xv2v) <= 0) {
+        return false;
+    }
+    
+    Vec3d v3v1 = v1-v3;
+    Vec3d v3v = v-v3;
+    Vec3d v3v1xv3v = v3v1.cross(v3v);
+    if (v3v1xv3v.dot(v2v3xv2v) <= 0) {
+        return false;
+    }
+    return true;
+    
+}
+
+intersectResult Triangle::intersect(const Ray &ray){
+    double a = ray.direction.dot(this->normal);
+    if (a >= 0) {
+        return intersectResult::notHit();
+    }
+    double b = this->normal.dot(ray.origin-this->v1);
+    intersectResult res;
+    res.isHit = true;
+    res.geometry = this;
+    res.distance = -b/a;
+    res.position = ray.getPoint(res.distance);
+    res.normal = this->normal;
+    if (!isInTriangle(res.position)) {
+        return intersectResult::notHit();
+    }
+    return res;
+}
+
+BiTriangle::BiTriangle(Vec3d _v1, Vec3d _v2, Vec3d _v3):Triangle(_v1,_v2,_v3){
+    
+}
 
 
 
+intersectResult BiTriangle::intersect(const Ray& ray){
+    double a = ray.direction.dot(this->normal);
+    Vec3d n = this->normal;
+    if (a > 0) {
+        //this->normal = -this->normal;
+        n = -this->normal;
+    }
+    double b = n.dot(ray.origin-this->v1);
+    intersectResult res;
+    res.isHit = true;
+    res.geometry = this;
+    res.distance = abs(-b/a);
+    res.position = ray.getPoint(res.distance);
+    res.normal = n;
+    if (!isInTriangle(res.position)) {
+        return intersectResult::notHit();
+    }
+    return res;
+}

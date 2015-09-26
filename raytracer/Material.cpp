@@ -12,6 +12,10 @@ Material::Material(Vec3d dif, Vec3d spec, double shin, double refl):diffuse(dif)
     
 }
 
+Material::Material():diffuse(0,0,0),specular(0,0,0),shininess(0),reflectiveness(0){
+    
+}
+
 checkerBoardMaterial::checkerBoardMaterial(double scl):scale(scl),Material(0,0,0,0){
     
 }
@@ -23,6 +27,8 @@ checkerBoardMaterial::checkerBoardMaterial(double scl, double refl):scale(scl),M
 checkerBoardMaterial::checkerBoardMaterial(Vec3d dif, Vec3d spec, double shin, double refl, double scl):Material(dif,spec,shin,refl),scale(scl){
     
 }
+
+
 
 Vec3d checkerBoardMaterial::shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene){
     Vec3d refdir = ray.direction -  2*ray.direction.dot(normal)*normal;
@@ -39,6 +45,34 @@ Vec3d checkerBoardMaterial::shade(const Ray& ray, const Vec3d position, const Ve
     Vec3d term1 = abs((int)(floor(position[0]*this->scale) + floor(position[2]*this->scale))%2)    < 1?Vec3d(0,0,0):(1-reflectiveness)*Vec3d(1,1,1) ;
     return reflectiveness*specterm+term1;
 }
+
+ColorfulCheckerBoardMaterial::ColorfulCheckerBoardMaterial(double scl, Vec3d color):checkerBoardMaterial(scl),color(color){
+    
+}
+
+Vec3d ColorfulCheckerBoardMaterial::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene){
+    Vec3d refdir = ray.direction -  2*ray.direction.dot(normal)*normal;
+    Ray refl(position, refdir);
+    refl.refcount = ray.refcount+1;
+   
+    Vec3d term1 = abs((int)(floor(position[0]*this->scale) + floor(position[2]*this->scale))%2) < 1?color:Vec3d(1,1,1);
+    
+    Vec3d term2(0,0,0);
+    for (int i = 0; i < scene.lights.size(); i++) {
+        Light& light = *scene.lights[i];
+        LightSample sample = light.sample(scene, position);
+        if (sample.irradiance != Vec3d(0,0,0)) {
+            double NdotL = normal.dot(-sample.direction);
+            
+            //angle < 90
+            if (NdotL >= 0) {
+                term2 += sample.irradiance*NdotL;
+            }
+        }
+    }
+    return modulateColor(term1, term2);
+}
+
 
 Phong::Phong(Vec3d dif, Vec3d spec, double shin, double refl):Material(dif,spec,shin,refl){
 
@@ -115,9 +149,26 @@ Vec3d ColorfulBasicMaterial::shade(const Ray &ray, const Vec3d position, const V
 }
 
 
+Lambertian::Lambertian(Vec3d color):color(color),Material(){
+    
+}
 
-
-
+Vec3d Lambertian::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene){
+    Vec3d ir(0,0,0);
+    for (int i = 0; i < scene.lights.size(); i++) {
+        Light& light = *scene.lights[i];
+        LightSample sample = light.sample(scene, position);
+        if (sample.irradiance != Vec3d(0,0,0)) {
+            double NdotL = normal.dot(-sample.direction);
+            
+            //angle < 90
+            if (NdotL >= 0) {
+                ir += sample.irradiance*INV_PI;
+            }
+        }
+    }
+    return modulateColor(this->color, ir);
+}
 
 
 

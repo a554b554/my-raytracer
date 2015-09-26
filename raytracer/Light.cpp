@@ -59,7 +59,7 @@ LightSample PointLight::sample(Scene &scene, Vec3d position){
     //shadow test
     Ray shadowray(position, L);
     intersectResult res = scene.intersect(shadowray);
-    if (res.isHit && res.distance <= r) {
+    if (res.isHit && res.distance < r) {
         //cout<<res.distance<<endl;
         return LightSample::zero();
     }
@@ -90,6 +90,21 @@ LightSample SpotLight::sample(Scene &scene, Vec3d position){
     else if(SdotL < this->cosphi){
         spot = 0;
     }
+    else{
+        spot = pow((SdotL-this->cosphi)*this->base, this->falloff);
+    }
+    
+    //shadow test
+    Ray shadowRay = Ray(position, L);
+    intersectResult shadowResult = scene.intersect(shadowRay);
+    
+    if (shadowResult.isHit && shadowResult.distance <= r) {
+        return LightSample::zero();
+    }
+    
+    double attenuation = 1./r2;
+    
+    return LightSample(-L, this->irradiance*attenuation*spot);
     
 }
 

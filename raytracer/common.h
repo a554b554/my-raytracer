@@ -9,6 +9,7 @@
 #ifndef __raytracer__common__
 #define __raytracer__common__
 
+#define INV_PI 0.31830989
 #include <stdio.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>

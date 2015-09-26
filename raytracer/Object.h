@@ -69,6 +69,26 @@ private:
 };
 
 
+class Triangle : public Object{
+public:
+    Triangle(Vec3d _v1, Vec3d _v2, Vec3d _v3);
+    Vec3d normal;
+    double d;
+    Vec3d v1;
+    Vec3d v2;
+    Vec3d v3;
+    bool isInTriangle(const Vec3d& v);
+    intersectResult intersect(const Ray& ray);
+};
+
+//no use
+class BiTriangle: public Triangle{
+public:
+    BiTriangle(Vec3d _v1, Vec3d _v2, Vec3d _v3);
+    intersectResult intersect(const Ray& ray);
+};
+
+
 /////////////Scene///////////////////////
 class Light;
 class Camera;
@@ -87,6 +107,7 @@ public:
 //////////////Material////////////////////
 class Material{
 public:
+    Material();
     Material(Vec3d dif, Vec3d spec, double shin, double refl);
     Vec3d diffuse;
     Vec3d specular;
@@ -103,6 +124,13 @@ public:
     checkerBoardMaterial(double scl, double refl);
     Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
     double scale;
+};
+
+class ColorfulCheckerBoardMaterial : public checkerBoardMaterial{
+public:
+    ColorfulCheckerBoardMaterial(double scl, Vec3d color);
+    Vec3d color;
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
 };
 
 
@@ -126,7 +154,12 @@ public:
     Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
 };
 
-
+class Lambertian : public Material{
+public:
+    Lambertian(Vec3d color);
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
+    Vec3d color;
+};
 
 void rayTrace(Scene& scene, Size canvasSize);
 #endif /* defined(__raytracer__Object__) */

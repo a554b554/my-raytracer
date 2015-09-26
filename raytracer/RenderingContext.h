@@ -21,4 +21,8 @@ void renderMaterial();
 void renderDepth();
 void renderNormal();
 void renderLight();
+void renderManyLights();
+void materialTest();
+void superRayTrace(Scene& scene, Size canvasSize, int sampleSize);
+void adaptiveSuperRayTrace(Scene& scene, Size canvasSize);
 #endif /* defined(__raytracer__RenderingContext__) */
