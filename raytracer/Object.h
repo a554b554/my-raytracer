@@ -27,6 +27,7 @@ struct intersectResult{
     Vec3d position;
     double distance;
     Vec3d normal;
+    Point2d textureCor;
 };
 
 
@@ -47,7 +48,10 @@ public:
     double radius;
     Sphere();
     Sphere(Vec3d loc, double r);
+    Sphere(Vec3d loc, Vec3d sp, Vec3d se, double r);
     intersectResult intersect(const Ray& ray);
+    Vec3d sp;
+    Vec3d se;
 };
 
 
@@ -113,7 +117,7 @@ public:
     Vec3d specular;
     double shininess;
     double reflectiveness;
-    virtual Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene) = 0;
+    virtual Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0)) = 0;
 };
 
 //only for test
@@ -122,7 +126,7 @@ public:
     checkerBoardMaterial(Vec3d dif, Vec3d spec, double shin, double refl, double scl);
     checkerBoardMaterial(double scl);
     checkerBoardMaterial(double scl, double refl);
-    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0));
     double scale;
 };
 
@@ -130,34 +134,43 @@ class ColorfulCheckerBoardMaterial : public checkerBoardMaterial{
 public:
     ColorfulCheckerBoardMaterial(double scl, Vec3d color);
     Vec3d color;
-    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0));
 };
 
 
 class Phong : public Material{
 public:
     Phong(Vec3d dif, Vec3d spec, double shin, double refl);
-    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0));
 };
 
 class BasicMaterial : public Material{
 public:
     BasicMaterial();
     BasicMaterial(Vec3d dif, Vec3d spec, double shin, double refl);
-    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0));
 };
 
 class ColorfulBasicMaterial : public BasicMaterial{
 public:
     ColorfulBasicMaterial(Vec3d color);
     Vec3d color;
-    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0));
 };
+
+class TexturedBasicMaterial: public BasicMaterial{
+public:
+    TexturedBasicMaterial(Mat& texture);
+    Mat texture;
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0));
+};
+
+
 
 class Lambertian : public Material{
 public:
     Lambertian(Vec3d color);
-    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene);
+    Vec3d shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor = Point2d(0,0));
     Vec3d color;
 };
 

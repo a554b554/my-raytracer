@@ -21,12 +21,14 @@ void Scene::addLight(Light *lt){
     lights.push_back(lt);
 }
 
+double tolerance = 0.0001;
+
 intersectResult Scene::intersect(Ray &ray){
     intersectResult minResult = intersectResult::notHit();
     double minDist = INFINITY;
     for (int i = 0; i < this->objectlist.size(); i++) {
         intersectResult tmp = objectlist[i]->intersect(ray);
-        if (!tmp.isHit) {
+        if (!tmp.isHit || tmp.distance < tolerance) {
             continue;
         }
         if (tmp.distance<minDist) {
@@ -211,42 +213,39 @@ void renderManyLights(){
     Object* plane1 = new Plane(Vec3d(0,1,0),0);
     Object* plane2 = new Plane(Vec3d(0,0,1),-50);
     Object* plane3 = new Plane(Vec3d(1,0,0),-20);
-    Object* sphere = new Sphere(Vec3d(0,10,-10),10);
+    Vec3d o(0,10,-10);
+    
+    Object* sphere = new Sphere(o,Vec3d(-1,1,0),Vec3d(1,1,0),10);
     Vec3d p1(0,6,3),p2(3,6,0),p3(-10,6,-10);
-    Object* sphere1 = new Sphere(p1,11);
-    Object* sphere2 = new Sphere(p2,11);
-    Object* sphere3 = new Sphere(p3,11);
+ 
     Object* tr = new BiTriangle(p1,p2,p3);
     Object* tr2 = new Triangle(p3,p2,p1);
     tr->material = new BasicMaterial();
     tr2->material = new BasicMaterial();
     Scene s(&cmr);
     Light* filllight = new DirectionalLight(Vec3d(1.5,1,0.5),0.25*Vec3d(1,1,1));
-    for (int x = 10; x <= 30; x+=8) {
-        for (int z = 20; z <= 40; z+=8) {
-            s.addLight(new PointLight(Vec3d(200,200,200), Vec3d(x,50,z)));
+    for (int x = 10; x <= 30; x+=4) {
+        for (int z = 20; z <= 40; z+=4) {
+            s.addLight(new PointLight(200*Vec3d(1,1,1), Vec3d(x,50,z)));
         }
     }
-    s.addObject(tr);
-    sphere1->material = new ColorfulBasicMaterial(Vec3d(0,0,1));
-    sphere2->material = new ColorfulBasicMaterial(Vec3d(0,1,0));
-    sphere3->material = new ColorfulBasicMaterial(Vec3d(1,0,0));
-//    s.addObject(sphere1);
-//    s.addObject(sphere2);
-//    s.addObject(sphere3);
+//    s.addObject(tr);
+
 //    s.addObject(tr2);
     s.addLight(filllight);
     s.addObject(plane1);
     s.addObject(plane2);
     s.addObject(plane3);
-//    s.addObject(sphere);
+    s.addObject(sphere);
     plane1->material = new ColorfulBasicMaterial(Vec3d(0,0,1));
     plane2->material = new ColorfulBasicMaterial(Vec3d(0,1,0));
     plane3->material = new ColorfulBasicMaterial(Vec3d(1,0,0));
     //        sphere->material = new Phong(Vec3d(1,0,1), Vec3d(1,1,1),20, 0);
-    sphere->material = new ColorfulBasicMaterial(Vec3d(1,1,1));
+    Mat tex = imread("../../resources/p.png");
+    sphere->material = new TexturedBasicMaterial(tex);
 //    sphere->material = new Phong(Vec3d(1,0,1), Vec3d(1,1,1),20, 0);
-    rayTrace(s, canv);
+//    rayTrace(s, canv);
+    adaptiveSuperRayTrace(s, canv);
     waitKey(0);
 }
 
@@ -305,7 +304,7 @@ Vec3d shading(Scene& scene, Ray& ray){
             }
             continue;
         }
-        Vec3d color = res.geometry->material->shade(ray, res.position, res.normal, scene);
+        Vec3d color = res.geometry->material->shade(ray, res.position, res.normal, scene, res.textureCor);
         if (res.distance < dist) {
             dist = res.distance;
             final = color;
@@ -382,7 +381,7 @@ void superRayTrace(Scene& scene, Size canvasSize, int sampleSize){
     img *= 255;
     Mat result;
     img.convertTo(result, CV_8UC3);
-    imwrite("../../result/antialiasing.png", img);
+//    imwrite("../../result/antialiasing.png", img);
 //    imshow("result ", result);
 }
 
@@ -434,7 +433,7 @@ void adaptiveSuperRayTrace(Scene& scene, Size canvasSize){
     img *= 255;
     Mat result;
     img.convertTo(result, CV_8UC3);
-//    imwrite("../../result/adaptive.png", img);
+    imwrite("../../result/texturemapping.png", img);
 }
 
 

@@ -27,6 +27,11 @@ Sphere::Sphere(Vec3d loc, double r):Object(loc),radius(r){
     
 }
 
+Sphere::Sphere(Vec3d loc, Vec3d sp, Vec3d se, double r):Object(loc),sp(sp),se(se),radius(r){
+    sp/=norm(sp);
+    se/=norm(se);
+}
+
 intersectResult Object::intersect(const Ray& ray){
     return intersectResult::notHit();
 }
@@ -49,6 +54,26 @@ intersectResult Sphere::intersect(const Ray &ray){
             result.position = ray.getPoint(result.distance);
             result.normal = result.position-this->location;
             result.normal /= norm(result.normal);
+            
+            Point2d cor;
+            double phi = acos(max(min(-result.normal.dot(sp),1.),-1.));
+            double term = max(min(se.dot(result.normal)/sin(phi),1.),-1.);
+            double theta = acos(term)/(2*M_PI);
+//            printf("%lf %lf %lf %lf\n",se.dot(result.normal), sin(phi), acos(term), acos(1.));
+            if (isnan(phi)) {
+                phi=0;
+            }
+            if(isnan(theta)){
+                theta=0;
+            }
+            cor.x = phi/M_PI;
+            if (sp.cross(se).dot(result.normal)>0) {
+                cor.y = theta;
+            }
+            else{
+                cor.y = 1 - theta;
+            }
+            result.textureCor = cor;
             return result;
         }
     }

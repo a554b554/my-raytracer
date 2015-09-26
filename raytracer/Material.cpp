@@ -30,7 +30,7 @@ checkerBoardMaterial::checkerBoardMaterial(Vec3d dif, Vec3d spec, double shin, d
 
 
 
-Vec3d checkerBoardMaterial::shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene){
+Vec3d checkerBoardMaterial::shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor){
     Vec3d refdir = ray.direction -  2*ray.direction.dot(normal)*normal;
     Ray refl(position, refdir);
     refl.refcount = ray.refcount+1;
@@ -50,7 +50,7 @@ ColorfulCheckerBoardMaterial::ColorfulCheckerBoardMaterial(double scl, Vec3d col
     
 }
 
-Vec3d ColorfulCheckerBoardMaterial::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene){
+Vec3d ColorfulCheckerBoardMaterial::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene, Point2d textureCor){
     Vec3d refdir = ray.direction -  2*ray.direction.dot(normal)*normal;
     Ray refl(position, refdir);
     refl.refcount = ray.refcount+1;
@@ -78,7 +78,7 @@ Phong::Phong(Vec3d dif, Vec3d spec, double shin, double refl):Material(dif,spec,
 
 }
 
-Vec3d Phong::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene){
+Vec3d Phong::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene, Point2d textureCor){
     Vec3d ans(0,0,0);
     for (int i = 0; i < scene.lights.size(); i++) {
         
@@ -120,7 +120,7 @@ BasicMaterial::BasicMaterial():Material(Vec3d(0,0,0),Vec3d(0,0,0),0,0){
     
 }
 
-Vec3d BasicMaterial::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene){
+Vec3d BasicMaterial::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene, Point2d textureCor){
     Vec3d color(0,0,0);
     for (int i = 0; i < scene.lights.size(); i++) {
         Light& light = *scene.lights[i];
@@ -143,7 +143,7 @@ ColorfulBasicMaterial::ColorfulBasicMaterial(Vec3d color):BasicMaterial(),color(
 }
 
 
-Vec3d ColorfulBasicMaterial::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene){
+Vec3d ColorfulBasicMaterial::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene, Point2d textureCor){
     Vec3d c = BasicMaterial::shade(ray, position, normal, scene);
     return modulateColor(c, this->color);
 }
@@ -153,7 +153,7 @@ Lambertian::Lambertian(Vec3d color):color(color),Material(){
     
 }
 
-Vec3d Lambertian::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene){
+Vec3d Lambertian::shade(const Ray &ray, const Vec3d position, const Vec3d normal, Scene &scene, Point2d textureCor){
     Vec3d ir(0,0,0);
     for (int i = 0; i < scene.lights.size(); i++) {
         Light& light = *scene.lights[i];
@@ -170,6 +170,15 @@ Vec3d Lambertian::shade(const Ray &ray, const Vec3d position, const Vec3d normal
     return modulateColor(this->color, ir);
 }
 
+TexturedBasicMaterial::TexturedBasicMaterial(Mat& texture):texture(texture){
+    
+}
 
-
-
+Vec3d TexturedBasicMaterial::shade(const Ray& ray, const Vec3d position, const Vec3d normal, Scene& scene, Point2d textureCor){
+    Vec3d c = BasicMaterial::shade(ray, position, normal, scene);
+    Vec3d color = texture.at<Vec3b>(textureCor.y*texture.rows-1, textureCor.x*texture.cols-1);
+    
+    color /= 255;
+    return modulateColor(color, c);
+    
+}

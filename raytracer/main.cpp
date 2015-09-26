@@ -19,8 +19,8 @@ int main(int argc, char *argv[]){
     //renderDepth();
 //    renderNormal();
 //    renderMaterial();
-    renderCheckerboard();
+//    renderCheckerboard();
 //    renderLight();
-//    renderManyLights();
-    materialTest();
+    renderManyLights();
+//    materialTest();
 }
