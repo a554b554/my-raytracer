@@ -145,7 +145,7 @@ void renderCheckerboard(){
     s.addObject(ball2);
     s.addObject(plane);
 //    adaptiveSuperRayTrace(s, canv);
-    rayTrace(s, canv);
+//    rayTrace(s, canv);
     waitKey(0);
 }
 
@@ -197,7 +197,7 @@ void renderLight(){
         plane3->material = new BasicMaterial();
         sphere->material = new Phong(Vec3d(1,0,1), Vec3d(1,1,1),20, 0);
 //        sphere->material = new ColorfulBasicMaterial(Vec3d(1,1,1));
-        rayTrace(s, canv);
+//        rayTrace(s, canv);
     }
     
 }
@@ -245,44 +245,119 @@ void renderManyLights(){
     sphere->material = new TexturedBasicMaterial(tex);
 //    sphere->material = new Phong(Vec3d(1,0,1), Vec3d(1,1,1),20, 0);
 //    rayTrace(s, canv);
-    adaptiveSuperRayTrace(s, canv);
+//    adaptiveSuperRayTrace(s, canv);
     waitKey(0);
 }
 
 
 void materialTest(){
 
-    Vec3d eye(10,10,10);
-    Vec3d forward(-1,-1,-1);
-    Vec3d up(-1,-1,2);
+    Vec3d eye(0,30,40);
+    Vec3d forward(0,0,-1);
+    Vec3d up(0,1,0);
     double sz = 400;
     Size canv(sz,sz);
     Camera cmr(eye, forward, up, 90);
-    Object* ground = new Plane(Vec3d(0,0,1),-1);
-    Object* leftground = new Plane(Vec3d(0,1,0),-15);
-    Object* rightground = new Plane(Vec3d(1,0,0),-10);
-    Object* out = new Sphere(Vec3d(5,5,5),5);
     
-//    ground->material = new ColorfulCheckerBoardMaterial(1,Vec3d(0.3,0.3,0.3));
-    ground->material = new ColorfulBasicMaterial(Vec3d(1,0,1));
-    leftground->material = new ColorfulBasicMaterial(Vec3d(0,1,1));
-    rightground->material = new ColorfulBasicMaterial(Vec3d(1,1,0));
-    out->material = new Lambertian(Vec3d(1,0,0));
+    
+    Object* aa = new Triangle(Vec3d(1,-1,1),Vec3d(0,1,0),Vec3d(1,1,0));
+    aa->Rotation(Vec3d(1,1,1));
+    
+    Object* plane1 = new Plane(Vec3d(0,-1,0),0);
+    Object* plane2 = new Plane(Vec3d(0,0,1),-50);
+    Object* plane3 = new Plane(Vec3d(1,0,0),-20);
+    Vec3d o(0,10,-10);
+    plane1->setMaterial(new ColorfulBasicMaterial(Vec3d(0,0,1)));
+    plane2->setMaterial(new ColorfulBasicMaterial(Vec3d(0,1,0)));
+    plane3->setMaterial(new ColorfulBasicMaterial(Vec3d(1,0,0)));
+    
+    ObjLoader loader("../../resources/bunny.obj");
+    vector<Vec3d> vv;
+    vector<Vec3i> ff;
+    loader.parse(vv, ff);
+    
+    Object* bunny = new UnionObject(vv,ff,Vec3d(0,10,0),60);
+    bunny->setMaterial(new ColorfulBasicMaterial(Vec3d(1,1,1)));
+    Vec3d p1(0,6,3),p2(3,6,0),p3(-10,6,-10);
+    
+    Object* ball = new Sphere(Vec3d(0,0,0),12);
+    ball->setMaterial(new ColorfulBasicMaterial(Vec3d(1,1,1)));
     
     
     Scene s(&cmr);
-    Light* dirl = new DirectionalLight(Vec3d(-0.5,-0.5,-1),Vec3d(1,1,1));
-    Light* plt = new PointLight(2000*Vec3d(1,1,1), Vec3d(30,30,30));
-    s.addLight(plt);
-//    s.addLight(dirl);
-    s.addObject(out);
-    s.addObject(ground);
-    s.addObject(leftground);
-    s.addObject(rightground);
-    rayTrace(s, canv);
+    s.addObject(bunny);
+//    s.addObject(dynamic_cast<UnionObject*>(bunny)->boundingSphere);
+//    s.addObject(ball);
+    s.addObject(plane1);
+    s.addObject(plane2);
+    s.addObject(plane3);
+    s.addLight(new PointLight(800*Vec3d(1,1,1), Vec3d(10,50,20)));
+    s.addLight(new PointLight(800*Vec3d(1,1,1), Vec3d(15,50,25)));
     
+//    adaptiveSuperRayTrace(s, canv);
+//    rayTrace(s, canv);
+    waitKey(0);
+
+}
+
+
+void transformation(){
+    Vec3d eye(0,30,40);
+    Vec3d forward(0,0,-1);
+    Vec3d up(0,1,0);
+    double sz = 400;
+    Size canv(sz,sz);
+    Camera cmr(eye, forward, up, 90);
+    
+    
+    Object* aa = new Triangle(Vec3d(1,-1,1),Vec3d(0,1,0),Vec3d(1,1,0));
+    aa->Rotation(Vec3d(1,1,1));
+    
+    Object* plane1 = new Plane(Vec3d(0,-1,0),0);
+    Object* plane2 = new Plane(Vec3d(0,0,1),-50);
+    Object* plane3 = new Plane(Vec3d(1,0,0),-20);
+    Vec3d o(0,10,-10);
+    plane1->setMaterial(new ColorfulBasicMaterial(Vec3d(0,0,1)));
+    plane2->setMaterial(new ColorfulBasicMaterial(Vec3d(0,1,0)));
+    plane3->setMaterial(new ColorfulBasicMaterial(Vec3d(1,0,0)));
+    
+    ObjLoader loader("../../resources/bunny.obj");
+    vector<Vec3d> vv;
+    vector<Vec3i> ff;
+    loader.parse(vv, ff);
+    
+    Object* bunny = new UnionObject(vv,ff,Vec3d(0,10,0),60);
+    bunny->setMaterial(new ColorfulBasicMaterial(Vec3d(1,1,1)));
+    Vec3d p1(0,6,3),p2(3,6,0),p3(-10,6,-10);
+    
+    Object* ball = new Sphere(Vec3d(0,0,0),12);
+    ball->setMaterial(new ColorfulBasicMaterial(Vec3d(1,1,1)));
+    
+    
+    Scene s(&cmr);
+    s.addObject(bunny);
+    //    s.addObject(dynamic_cast<UnionObject*>(bunny)->boundingSphere);
+    //    s.addObject(ball);
+    s.addObject(plane1);
+    s.addObject(plane2);
+    s.addObject(plane3);
+    s.addLight(new PointLight(800*Vec3d(1,1,1), Vec3d(10,50,20)));
+    s.addLight(new PointLight(800*Vec3d(1,1,1), Vec3d(15,50,25)));
+    
+    //    adaptiveSuperRayTrace(s, canv);
+    Vec3d angle(0,0,0);
+    Mat out;
+    for (int i = 0; i < 10; i++) {
+        bunny->Rotation(angle);
+        rayTrace(s, canv, out);
+        angle += Vec3d(0.1,0,0);
+        imwrite("../../result/rot"+to_string(i)+".png", out);
+    }
     waitKey(0);
 }
+
+
+
 
 void onMouse(int event,int x, int y, int flag,void*p){
     if (event==CV_EVENT_LBUTTONDOWN) {
@@ -316,8 +391,8 @@ Vec3d shading(Scene& scene, Ray& ray){
 }
 
 
-void rayTrace(Scene& scene, Size canvasSize){
-    Mat img(canvasSize,CV_64FC3);
+void rayTrace(Scene& scene, Size canvasSize, Mat& img){
+    img.create(canvasSize,CV_64FC3);
     img.setTo(Scalar::all(0));
     
     for (int i = 0; i < canvasSize.height; i++) {
@@ -326,8 +401,9 @@ void rayTrace(Scene& scene, Size canvasSize){
             double sx = (double)j/canvasSize.width;
             Ray r = scene.cmr->generateRay(sx, sy);
             img.at<Vec3d>(i,j) = shading(scene, r);
-//            cout<<"i: "<<i<<" j: "<<j<<endl;
+            
         }
+        cout<<"i: "<<i<<endl;
     }
    
 
@@ -340,13 +416,13 @@ void rayTrace(Scene& scene, Size canvasSize){
     img *= 255;
     Mat result;
     img.convertTo(result, CV_8UC3);
-//    imwrite("../../result/origin.png", img);
+//    imwrite("../../result/bunny2.png", img);
 //    imshow("result ", result);
 //    waitKey(0);
 }
 
-void superRayTrace(Scene& scene, Size canvasSize, int sampleSize){
-    Mat img(canvasSize,CV_64FC3);
+void superRayTrace(Scene& scene, Size canvasSize, int sampleSize, Mat& img){
+    img.create(canvasSize,CV_64FC3);
     img.setTo(Scalar::all(0));
     double stepx = 1./canvasSize.width/sampleSize;
     double stepy = 1./canvasSize.height/sampleSize;
@@ -377,16 +453,17 @@ void superRayTrace(Scene& scene, Size canvasSize, int sampleSize){
     Point p;
     namedWindow("img");
     
-    imshow("img", img);
+//    imshow("img", img);
     img *= 255;
     Mat result;
-    img.convertTo(result, CV_8UC3);
+    img.convertTo(img, CV_8UC3);
 //    imwrite("../../result/antialiasing.png", img);
-//    imshow("result ", result);
+    imshow("result ", img);
+    waitKey(1);
 }
 
-void adaptiveSuperRayTrace(Scene& scene, Size canvasSize){
-    Mat img(canvasSize,CV_64FC3);
+void adaptiveSuperRayTrace(Scene& scene, Size canvasSize, Mat& img){
+    img.create(canvasSize,CV_64FC3);
     img.setTo(Scalar::all(0));
     
     double stepx = 1./canvasSize.width;
@@ -419,8 +496,9 @@ void adaptiveSuperRayTrace(Scene& scene, Size canvasSize){
             
             final /= 5;
             img.at<Vec3d>(i,j) = final;
-            //            cout<<"i: "<<i<<" j: "<<j<<endl;
+            
         }
+        cout<<"i: "<<i<<endl;
     }
     
     
@@ -433,7 +511,7 @@ void adaptiveSuperRayTrace(Scene& scene, Size canvasSize){
     img *= 255;
     Mat result;
     img.convertTo(result, CV_8UC3);
-    imwrite("../../result/texturemapping.png", img);
+    imwrite("../../result/bunny2.png", img);
 }
 
 

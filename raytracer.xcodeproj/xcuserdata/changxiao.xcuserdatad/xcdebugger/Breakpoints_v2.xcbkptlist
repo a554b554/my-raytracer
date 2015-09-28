@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952190.580684"
+            timestampString = "465106365.595881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "Sphere::intersect(const Ray &amp;ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952190.580684"
+            timestampString = "465106365.595881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "Sphere::intersect(const Ray &amp;ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952190.580684"
+            timestampString = "465106365.595881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "Sphere::intersect(const Ray &amp;ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,12 +314,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/RenderingContext.cpp"
-            timestampString = "464952190.580684"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
-            landmarkName = "rayTrace(Scene&amp; scene, Size canvasSize)"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
+            landmarkName = "rayTrace(Scene&amp; scene, Size canvasSize, Mat&amp; img)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465106365.595881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "Plane::intersect(const Ray&amp; ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465106365.595881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "Plane::intersect(const Ray&amp; ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/RenderingContext.cpp"
-            timestampString = "464952190.580684"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "shading(Scene&amp; scene, Ray&amp; ray)"
             landmarkType = "7">
          </BreakpointContent>
@@ -538,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "Triangle::Triangle(Vec3d _v1, Vec3d _v2, Vec3d _v3)"
             landmarkType = "5">
          </BreakpointContent>
@@ -554,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "Triangle::intersect(const Ray &amp;ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -570,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "Triangle::intersect(const Ray &amp;ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -586,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
             landmarkName = "Triangle::isInTriangle(const Vec3d &amp;v)"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "Triangle::intersect(const Ray &amp;ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -650,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "Triangle::intersect(const Ray &amp;ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "BiTriangle::intersect(const Ray&amp; ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952344.351732"
+            timestampString = "465108509.518541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "BiTriangle::intersect(const Ray&amp; ray)"
             landmarkType = "5">
          </BreakpointContent>
@@ -730,12 +730,172 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "raytracer/Object.cpp"
-            timestampString = "464952341.689435"
+            timestampString = "465106365.595881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "Sphere::intersect(const Ray &amp;ray)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/main.cpp"
+            timestampString = "465012530.336707"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/RenderingContext.cpp"
+            timestampString = "465106365.595881"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "materialTest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/Object.cpp"
+            timestampString = "465108509.518541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "UnionObject::UnionObject(vector&lt;Vec3d&gt;&amp; vertices, vector&lt;Vec3i&gt;&amp; faces, Vec3d offset, double scale)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/RenderingContext.cpp"
+            timestampString = "465106365.595881"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "materialTest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/Object.cpp"
+            timestampString = "465108509.518541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "UnionObject::UnionObject(vector&lt;Vec3d&gt;&amp; vertices, vector&lt;Vec3i&gt;&amp; faces, Vec3d offset, double scale)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/Object.cpp"
+            timestampString = "465108509.518541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "UnionObject::UnionObject(vector&lt;Vec3d&gt;&amp; vertices, vector&lt;Vec3i&gt;&amp; faces, Vec3d offset, double scale)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/Object.cpp"
+            timestampString = "465108509.518541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "UnionObject::UnionObject(vector&lt;Vec3d&gt;&amp; vertices, vector&lt;Vec3i&gt;&amp; faces, Vec3d offset, double scale)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/Object.cpp"
+            timestampString = "465108509.518541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "UnionObject::intersect(const Ray &amp;ray)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/Object.cpp"
+            timestampString = "465108509.518541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "UnionObject::UnionObject(vector&lt;Vec3d&gt;&amp; vertices, vector&lt;Vec3i&gt;&amp; faces, Vec3d offset, double scale)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "raytracer/Object.cpp"
+            timestampString = "465108509.518541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "Triangle::Rotation(Vec3d rot)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

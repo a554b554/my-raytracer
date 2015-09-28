@@ -12,6 +12,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "Object.h"
 #include "RenderingContext.h"
+#include "ObjLoader.h"
 using namespace std;
 using namespace cv;
 
@@ -21,6 +22,8 @@ int main(int argc, char *argv[]){
 //    renderMaterial();
 //    renderCheckerboard();
 //    renderLight();
-    renderManyLights();
+  
+//    renderManyLights();
 //    materialTest();
+    transformation();
 }

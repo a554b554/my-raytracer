@@ -28,6 +28,7 @@ struct intersectResult{
     double distance;
     Vec3d normal;
     Point2d textureCor;
+    bool isinside;
 };
 
 
@@ -38,7 +39,11 @@ public:
     Vec3d location;
     Material* material;
     virtual intersectResult intersect(const Ray& ray);
+    virtual void setMaterial(Material* m);
     virtual ~Object()=0;
+    virtual void Rotation(Vec3d rot);
+    virtual void Translation(Vec3d t);
+    virtual void Scalation(double s);
 };
 
 
@@ -57,17 +62,43 @@ public:
 
 class Plane: public Object{
 public:
+    Plane();
     Plane(Vec3d _normal, double _d);
     Vec3d normal;
     double d;
     intersectResult intersect(const Ray& ray);
     
+    
+};
+
+class Slab : public Object{
+public:
+    Slab();
+    Slab(Plane p1, double thick);
+    Plane p1;
+    Plane p2;
+    intersectResult intersect(const Ray& ray);
+};
+
+class Cube : public Object{
+public:
+    Cube(Slab* s1, Slab* s2, Slab* s3);
+    Slab* slabs[3];
+    intersectResult intersect(const Ray& ray);
 };
 
 class UnionObject : public Object{
 public:
     UnionObject(vector<Object*> _objs);
+    UnionObject(vector<Vec3d>& vertices, vector<Vec3i>& faces);
+    UnionObject(vector<Vec3d>& vertices, vector<Vec3i>& faces, Vec3d offset, double scale);
     intersectResult intersect(const Ray& ray);
+    void setMaterial(Material* m);
+    Sphere* boundingSphere;
+    void Rotation(Vec3d rot);
+    void Translation(Vec3d t);
+    void Scalation(double s);
+    
 private:
     vector<Object*> objs;
 };
@@ -76,6 +107,7 @@ private:
 class Triangle : public Object{
 public:
     Triangle(Vec3d _v1, Vec3d _v2, Vec3d _v3);
+    Triangle(Vec3d _v1, Vec3d _v2, Vec3d _v3, Vec3d loc);
     Vec3d normal;
     double d;
     Vec3d v1;
@@ -83,13 +115,18 @@ public:
     Vec3d v3;
     bool isInTriangle(const Vec3d& v);
     intersectResult intersect(const Ray& ray);
+    void Rotation(Vec3d rot);
+    void Translation(Vec3d t);
+    void Scalation(double s);
 };
 
-//no use
+
 class BiTriangle: public Triangle{
 public:
     BiTriangle(Vec3d _v1, Vec3d _v2, Vec3d _v3);
+    BiTriangle(Vec3d _v1, Vec3d _v2, Vec3d _v3, Vec3d loc);
     intersectResult intersect(const Ray& ray);
+    
 };
 
 
@@ -174,5 +211,5 @@ public:
     Vec3d color;
 };
 
-void rayTrace(Scene& scene, Size canvasSize);
+
 #endif /* defined(__raytracer__Object__) */

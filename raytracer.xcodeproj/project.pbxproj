@@ -33,6 +33,7 @@
 		26F087071BAEC70E000A6864 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26F087051BAEC70E000A6864 /* Material.cpp */; };
 		26F0870A1BB031A8000A6864 /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26F087081BB031A8000A6864 /* Ray.cpp */; };
 		26F0870D1BB032E5000A6864 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26F0870B1BB032E5000A6864 /* Light.cpp */; };
+		26F087101BB6D545000A6864 /* ObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26F0870E1BB6D545000A6864 /* ObjLoader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,6 +84,8 @@
 		26F087091BB031A8000A6864 /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
 		26F0870B1BB032E5000A6864 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		26F0870C1BB032E5000A6864 /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		26F0870E1BB6D545000A6864 /* ObjLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjLoader.cpp; sourceTree = "<group>"; };
+		26F0870F1BB6D545000A6864 /* ObjLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjLoader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				26F087091BB031A8000A6864 /* Ray.h */,
 				26F086FF1BAE8BC3000A6864 /* Camera.cpp */,
 				26F087021BAE9A2C000A6864 /* RenderingContext.cpp */,
+				26F0870E1BB6D545000A6864 /* ObjLoader.cpp */,
+				26F0870F1BB6D545000A6864 /* ObjLoader.h */,
 				26F087031BAE9A2C000A6864 /* RenderingContext.h */,
 				26F087001BAE8BC3000A6864 /* Camera.h */,
 				26F086FA1BAE7EB3000A6864 /* parser.h */,
@@ -243,6 +248,7 @@
 				26F0870A1BB031A8000A6864 /* Ray.cpp in Sources */,
 				26F086FE1BAE7F17000A6864 /* Object.cpp in Sources */,
 				26F087041BAE9A2C000A6864 /* RenderingContext.cpp in Sources */,
+				26F087101BB6D545000A6864 /* ObjLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
