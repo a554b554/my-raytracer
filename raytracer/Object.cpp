@@ -256,11 +256,17 @@ void UnionObject::Rotation(Vec3d rot){
 }
 
 void UnionObject::Translation(Vec3d t){
-    
+    boundingSphere->location += t;
+    for (int i = 0; i < objs.size(); i++) {
+        objs[i]->Translation(t);
+    }
 }
 
 void UnionObject::Scalation(double s){
-    
+    boundingSphere->radius *= s;
+    for (int i = 0 ; i < objs.size(); i++) {
+        objs[i]->Scalation(s);
+    }
 }
 
 intersectResult UnionObject::intersect(const Ray &ray){
@@ -282,14 +288,14 @@ intersectResult UnionObject::intersect(const Ray &ray){
 }
 
 Triangle::Triangle(Vec3d _v1, Vec3d _v2, Vec3d _v3):v1(_v1),v2(_v2),v3(_v3),Object(Vec3d(0,0,0)){
-    Vec3d v1v2 = v2-v1;
-    Vec3d v1v3 = v3-v1;
-    normal = v1v2.cross(v1v3);
-    normal /= norm(normal);
-    d = (-v1).dot(normal);
+    update();
 }
 
 Triangle::Triangle(Vec3d _v1, Vec3d _v2, Vec3d _v3, Vec3d loc):v1(_v1),v2(_v2),v3(_v3),Object(loc){
+    update();
+}
+
+void Triangle::update(){
     Vec3d v1v2 = v2-v1;
     Vec3d v1v3 = v3-v1;
     normal = v1v2.cross(v1v3);
@@ -348,18 +354,14 @@ void Triangle::Rotation(Vec3d rot){
     rotx<<1,0,0,
            0,cos(rot[0]),-sin(rot[0]),
            0,sin(rot[0]),cos(rot[0]);
-    v1 = rotx * v1;
-    v2 = rotx * v2;
-    v3 = rotx * v3;
+
     
     //roty
     Matx33d roty;
     roty << cos(rot[1]), 0, sin(rot[1]),
             0, 1, 0,
             -sin(rot[1]), 0, cos(rot[1]);
-    v1 = roty * v1;
-    v2 = roty * v2;
-    v3 = roty * v3;
+
     
     
     //rotz
@@ -367,22 +369,42 @@ void Triangle::Rotation(Vec3d rot){
     rotz<< cos(rot[2]), -sin(rot[2]), 0,
             sin(rot[2]), cos(rot[2]), 0,
             0, 0, 1;
-    v1 = rotz * v1;
-    v2 = rotz * v2;
-    v3 = rotz * v3;
+
+    Matx33d final = rotx*roty*rotz;
+    
+    v1 = final*v1;
+    v2 = final*v2;
+    v3 = final*v3;
     
     v1 += location;
     v2 += location;
     v3 += location;
     
+    update();
+    
 }
 
 void Triangle::Translation(Vec3d t){
-    
+    v1 += t;
+    v2 += t;
+    v3 += t;
+    update();
 }
 
 void Triangle::Scalation(double s){
+    v1 -= location;
+    v2 -= location;
+    v3 -= location;
     
+    v1 = v1*s;
+    v2 = v2*s;
+    v3 = v3*s;
+    
+    v1 += location;
+    v2 += location;
+    v3 += location;
+    
+    update();
 }
 
 

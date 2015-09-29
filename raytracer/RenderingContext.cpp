@@ -326,12 +326,16 @@ void transformation(){
     vector<Vec3i> ff;
     loader.parse(vv, ff);
     
-    Object* bunny = new UnionObject(vv,ff,Vec3d(0,10,0),60);
+    Object* bunny = new UnionObject(vv,ff,Vec3d(0,10,0),70);
     bunny->setMaterial(new ColorfulBasicMaterial(Vec3d(1,1,1)));
     Vec3d p1(0,6,3),p2(3,6,0),p3(-10,6,-10);
     
     Object* ball = new Sphere(Vec3d(0,0,0),12);
     ball->setMaterial(new ColorfulBasicMaterial(Vec3d(1,1,1)));
+    
+    
+    Object* trian = new BiTriangle(Vec3d(10,1,1),Vec3d(1,10,1),Vec3d(10,30,1),Vec3d(0,0,0));
+    trian->material = ball->material;
     
     
     Scene s(&cmr);
@@ -341,19 +345,36 @@ void transformation(){
     s.addObject(plane1);
     s.addObject(plane2);
     s.addObject(plane3);
+//    s.addObject(trian);
     s.addLight(new PointLight(800*Vec3d(1,1,1), Vec3d(10,50,20)));
     s.addLight(new PointLight(800*Vec3d(1,1,1), Vec3d(15,50,25)));
     
     //    adaptiveSuperRayTrace(s, canv);
     Vec3d angle(0,0,0);
     Mat out;
-    for (int i = 0; i < 10; i++) {
-        bunny->Rotation(angle);
+//    for (int i = 0; i < 20; i++) {
+//        bunny->Rotation(Vec3d(0,M_PI/18.,0));
+//        rayTrace(s, canv, out);
+//       
+//        imwrite("../../result/rotation/rot"+to_string(i)+".png", out);
+//        waitKey(1);
+//    }
+    
+//    for (int i = 0; i < 20; i++) {
+//        bunny->Translation(Vec3d(0,1,0));
+//        rayTrace(s, canv, out);
+//        
+//        imwrite("../../result/translation/trans"+to_string(i)+".png", out);
+//        waitKey(1);
+//    }
+    
+    
+    for (int i = 0; i < 15; i++) {
+        bunny->Scalation(1.1);
         rayTrace(s, canv, out);
-        angle += Vec3d(0.1,0,0);
-        imwrite("../../result/rot"+to_string(i)+".png", out);
+        imwrite("../../result/escalation/escl"+to_string(i)+".png", out);
+        waitKey(1);
     }
-    waitKey(0);
 }
 
 

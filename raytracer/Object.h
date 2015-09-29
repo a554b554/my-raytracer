@@ -118,6 +118,7 @@ public:
     void Rotation(Vec3d rot);
     void Translation(Vec3d t);
     void Scalation(double s);
+    void update();
 };
 
 
