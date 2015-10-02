@@ -9,6 +9,7 @@
 #include "RenderingContext.h"
 #include <iostream>
 
+
 Scene::Scene(Camera* camera):cmr(camera){
     
 }
